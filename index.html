@@ -269,7 +269,7 @@
 
     Principais colaboradores nacionais: o <strong>DCC-UFMG</strong>, o <strong>INATEL</strong> e a <strong>UFOP</strong>. <br/>
     Principais colaboradores internacionais: Laboratório de Comunicação e Telemática (LCT) da Universidade de Coimbra em Portugal. <br/>
-     
+
   </p>
 </div>
 <div class="col-lg-7 col-md-7 col-sm-7">
@@ -368,18 +368,19 @@
 
 
    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-    <form>
+    <form id="myform">
+      <input type="hidden" name="default_subject" class="form-control" value="Suporte Website Laccan" />
       <div class="form-group">
-        <input type="text" class="form-control "  required="required" placeholder="Seu Nome" />
+        <input type="text" name="user_name" class="form-control "  required="required" placeholder="Seu Nome" />
       </div>
       <div class="form-group">
-        <input type="email" class="form-control " required="required"  placeholder="Seu Email" />
+        <input type="email" name="user_email" class="form-control " required="required"  placeholder="Seu Email" />
       </div>
       <div class="form-group">
-        <textarea name="message" required="required" class="form-control" style="min-height: 150px;" placeholder="Mensagem"></textarea>
+        <textarea name="text" required="required" class="form-control" style="min-height: 150px;" placeholder="Mensagem"></textarea>
       </div>
       <div class="form-group">
-        <a class="btn btn-info btn-block btn-lg" href="mailto:laccan@ufal.br?subject=SMART CPMAT&cc=randy.quindai@gmail.com&body=De {{from}}">ENVIAR</a>
+        <input type="submit" class="btn btn-info btn-block btn-lg" value="ENVIAR">
       </div>
 
     </form>
@@ -440,17 +441,33 @@
 <!--  Custom Scripts --> 
 <script src="assets/js/custom.js"></script>
 <!-- Javascript for copy to Clipboard -->
+
+<script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
 <script type="text/javascript">
-  $(document).ready(function() {
-    $('[data-toggle="tooltip"]').tooltip();
-
-    $('#btn-copy').click(function(){
-      $('#txt-apiurl').focus().select();
-      document.execCommand('copy');
-      $('[title="Copiar para Clipboard"]').tooltip('Copiado!');
-    });
-  });
-
+ (function(){
+  emailjs.init("user_riMY6GSPw2aKtc2txQ9uC");
+})();
 </script>
+
+<script type="text/javascript">
+ var myform = $("form#myform");
+ myform.submit((ev)=>{
+  event.preventDefault();
+
+   let params = myform.serializeArray().reduce(function(obj, item) {
+     obj[item.name] = item.value;
+     return obj;
+  }, {});
+
+   emailjs.send("laccanwebid", "laccanwebid", params)
+      .then(function(){
+        alert("E-mail enviado, entraremos em contacto.\nObrigado!");
+        myform.trigger('reset');
+     }, function(err) {
+       alert("Envio falhou!\r\nMotivo: "+ JSON.stringify(err));
+    });
+      return false;
+    });
+  </script>
 </body>
 </html>
