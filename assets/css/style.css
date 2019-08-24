@@ -37,10 +37,18 @@ li a.hover{
 }
 
 /* INFRA */
+
+@media screen and (min-width: 800px) {
+    .list-group{
+        margin-top: 80px;
+        margin-left: 20em;
+        margin-right: 20em;
+        margin-bottom: 2.5em;
+    }
+  }
+
 .list-group{
     margin-top: 80px;
-    margin-left: 20em;
-    margin-right: 20em;
     margin-bottom: 2.5em;
 }
 
@@ -48,6 +56,28 @@ h5 i{
     padding-left: 5px;
     padding-right: 5px;
 }
+
+.list-group a:hover .infra_hover{
+    visibility: visible;
+    opacity: 1;
+}
+
+.infra_hover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(29, 106, 154, 0.12);
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+  
+    /* transition effect. not necessary */
+    transition: opacity .2s, visibility .2s;
+  }
+
+
 /*END INFRA*/
 
 #menu {
